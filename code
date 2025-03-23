@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 const app = express();
 const port = 3000;
 
-const API_URL = "http://35.200.185.69:8000/v1/autocomplete?query=";
+const API_URL = "http://35.200.185.69:8000/v1/autocomplete?query="; //change v1,vv2,v3 as per problem statement's need (rest of the code remains the same)
 const collectedNames = new Set();
 const searchedPrefixes = new Set();
 let queue = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
