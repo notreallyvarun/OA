@@ -22,7 +22,7 @@ async function fetchNames(prefix, attempt = 1) {
             let waitTime = Math.min(500 * attempt, 6000);
             console.warn(`Rate limited on: ${query}. Retrying in ${waitTime / 100}s...`);
             await delay(waitTime);
-            return await fetchNames(prefixes, attempt + 1);
+            return await fetchNames(prefix, attempt + 1);
         }
         if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
 
@@ -32,14 +32,14 @@ async function fetchNames(prefix, attempt = 1) {
                 if (!collectedNames.has(name)) {
                     collectedNames.add(name);
                     namesPulledCount++;
-                    if (name.length > prefixes[0].length) {
+                    if (name.length > prefix[0].length) {
                         queue.push(name);
                     }
                 }
             });
         }
     }} catch (error) {
-        console.error(`Error fetching ${prefixes}:`, error);
+        console.error(`Error fetching ${prefix}:`, error);
     }
 }
 
@@ -63,4 +63,3 @@ app.get("/stats", (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
-
